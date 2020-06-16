@@ -1,4 +1,5 @@
-<html>
+<!doctype html>
+<html lang="en">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -14,9 +15,8 @@
 <#include "header.ftl">
 <div class="jumbotron text-center">
     <div class="container">
-        <h1 class="display-3">Hello, World☕</h1>
-        <a  href="/source/all" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Открыть source</a>
-        <a href="profileResultView/findAll" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Открыть ProfileResultView</a>
+        <h1 class="display-3">😢 Ошибка! Что-то пошло не так </h1>
+        <p><a class="btn btn-primary btn-lg" href="/" role="button">Вернуться назад</a></p>
     </div>
 </div>
 <#include "footer.ftl">

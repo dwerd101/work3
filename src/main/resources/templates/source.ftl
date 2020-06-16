@@ -10,15 +10,22 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </head>
-<body>
 <#include "header.ftl">
-<div class="jumbotron text-center">
-    <div class="container">
-        <h1 class="display-3">Hello, World☕</h1>
-        <a  href="/source/all" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Открыть source</a>
-        <a href="profileResultView/findAll" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Открыть ProfileResultView</a>
-    </div>
-</div>
+<body>
+<table class="table table-striped table-bordered table-responsive-sm text-center">
+    <tr>
+        <th>ID</th>
+        <th>NAME</th>
+    </tr>
+    <tbody>
+    <#list list as source>
+    <tr>
+        <td>${source.id}</td>
+        <td>${source.name}</td>
+    </tr>
+    </tbody>
+    </#list>
+</table>
 <#include "footer.ftl">
 </body>
 </html>
