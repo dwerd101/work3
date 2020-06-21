@@ -1,4 +1,5 @@
-<html>
+<!doctype html>
+<html lang="en">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -10,22 +11,14 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </head>
-<#include "header.ftl">
 <body>
-<table class="table table-striped table-bordered table-responsive-sm text-center">
-    <tr>
-        <th>ID</th>
-        <th>NAME</th>
-    </tr>
-    <tbody>
-    <#list list as source>
-    <tr>
-        <td>${source.id} </td>
-        <td>${source.name}   <a class="nav-link" href="profileResultView/${source.id}">Главная страница<span class="sr-only">(current)</span></a></td>
-    </tr>
-    </tbody>
-    </#list>
-</table>
+<#include "header.ftl">
+<div class="jumbotron text-center">
+    <div class="container">
+        <h1 class="display-3">😢 Ошибка! Что-то пошло не так </h1>
+        <p><a class="btn btn-primary btn-lg" href="/" role="button">Вернуться назад</a></p>
+    </div>
+</div>
 <#include "footer.ftl">
 </body>
 </html>

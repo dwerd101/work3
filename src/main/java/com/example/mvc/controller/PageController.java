@@ -4,13 +4,23 @@ import com.example.mvc.converter.JsonConverter;
 import com.example.mvc.model.Model;
 import com.example.mvc.model.ProfileResultView;
 import com.example.mvc.model.Source;
+import com.google.gson.Gson;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -36,9 +46,51 @@ public class PageController {
        map.addAttribute("list", modelList);
        return "profileResultView";
     }
+    @SneakyThrows
+    @GetMapping("source/profileResultView/{id}")
+    public String findProfileResultViewBySourceName(@PathVariable Long id, ModelMap map) {
+        final String url = "http://localhost:8090/source/profileResultView/"+id;
+        String jsonArray = getJsonArray(url);
+        List<Model> modelList = JsonConverter.returnList(jsonArray, new ProfileResultView());
+        map.addAttribute("list", modelList);
+        return "profileResultViewBySourceName";
+    }
+
+    @PostMapping("source/profileResultView/send")
+    public String saveProfileResultView( @RequestParam(value="textId") Long[] idArray, @RequestParam(value = "text") String[] commentsArray) throws IOException {
+        URL url = new URL ("http://localhost:8090/profileResultView/save");
+
+        List<ProfileResultView> profileResultViewList = new ArrayList<>();
+        for(int i=0; i<idArray.length; i++) {
+            profileResultViewList.add(new ProfileResultView(idArray[i], commentsArray[i] ));
+        }
+
+        HttpURLConnection con = (HttpURLConnection)url.openConnection();
+        con.setRequestMethod("PUT");
+
+        con.setRequestProperty("Content-Type", "application/json; utf-8");
+        con.setRequestProperty("Accept", "application/json");
+
+        con.setDoOutput(true);
+
+        //JSON String need to be constructed for the specific resource.
+        //We may construct complex JSON using any third-party JSON libraries such as jackson or org.json
+        String jsonInputString = new Gson().toJson(profileResultViewList);
+
+        try(OutputStream os = con.getOutputStream()){
+            byte[] input = jsonInputString.getBytes("utf-8");
+            os.write(input, 0, input.length);
+        }
+         con.getResponseCode();
+
+        return "success";
+    }
 
     @GetMapping("/")
-    public String index() {
+    public String index(HttpServletRequest request)
+    {
+  /*     String s = request.getParameter("text");
+       int a = s.length();*/
         return "index";
     }
     private static String getJsonArray(String urlAdress) {

@@ -23,4 +23,9 @@ public class ProfileResultView implements Model{
     private String nameDomain;
     @JsonProperty("comment")
     private String comment;
+
+    public ProfileResultView(long profileId, String comment) {
+        this.profileId=profileId;
+        this.comment=comment;
+    }
 }
